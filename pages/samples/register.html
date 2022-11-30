@@ -27,18 +27,22 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <!-- <img src="../../images/logo.svg" alt="logo"> -->
+                <h4 style="color: #4B49AC;font-size: 25px;font-weight: 700;">WhatsApp Message</h4>
               </div>
               <h4>New here?</h4>
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-              <form class="pt-3">
+              <div class="pt-3">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username">
+                  <input type="text" class="form-control form-control-lg" id="name" placeholder="Username">
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                  <input type="tel" class="form-control form-control-lg" id="phone" placeholder="Phone">
                 </div>
                 <div class="form-group">
+                  <input type="email" class="form-control form-control-lg" id="email" placeholder="Email">
+                </div>
+                <!-- <div class="form-group">
                   <select class="form-control form-control-lg" id="exampleFormControlSelect2">
                     <option>Country</option>
                     <option>United States of America</option>
@@ -47,25 +51,25 @@
                     <option>Germany</option>
                     <option>Argentina</option>
                   </select>
-                </div>
+                </div> -->
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" class="form-control form-control-lg" id="password" placeholder="Password">
                 </div>
-                <div class="mb-4">
+                <!-- <div class="mb-4">
                   <div class="form-check">
                     <label class="form-check-label text-muted">
                       <input type="checkbox" class="form-check-input">
                       I agree to all Terms & Conditions
                     </label>
                   </div>
-                </div>
+                </div> -->
                 <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN UP</a>
+                    <button type="button" class="btn btn-primary btn-rounded btn-fw" id="signUp" >signUp</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
                   Already have an account? <a href="login.html" class="text-primary">Login</a>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -76,6 +80,56 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+    import { getDatabase,set,ref } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDBQM5Y540pT4KASoenhKGaBhcYLsNZvyY",
+      authDomain: "whatsapp-message-64701.firebaseapp.com",
+      projectId: "whatsapp-message-64701",
+      storageBucket: "whatsapp-message-64701.appspot.com",
+      messagingSenderId: "674355083869",
+      appId: "1:674355083869:web:514717f8b897ce85a76bb4",
+      measurementId: "G-ECY91JF6MH"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+    signUp.addEventListener('click', (e) => {
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      var password = document.getElementById("password").value
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          set(ref(database,'users/' + user.uid),{
+            name:name,
+            email:email,
+            phone:phone
+          })
+          location.replace("../../index.html");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(errorMessage)
+          // ..
+        });
+    })
+  </script>
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->

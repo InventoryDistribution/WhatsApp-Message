@@ -15,6 +15,11 @@
   <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+  
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
@@ -314,6 +319,45 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+          <div class="row">
+            <div class="col-10">
+              <div  class="d-flex flex-row">
+                <a href="index.html" style="text-decoration:none">
+                  <i class="ti-arrow-circle-left"></i>
+                </a>
+                <h6 class="font-weight-bolder mb-0 h5 ml-2">Home-Instances</h6>
+
+              </div>
+              
+            </div>
+            <div class="col-2 mb-4">
+              <button type="button" class="btn btn-primary btn-icon-text" data-toggle="modal" data-target="#myModal">
+                <i class="ti-plus btn-icon-prepend font-weight-bolder"></i>
+                Add Instance
+              </button>
+            </div>
+          </div> 
+            <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" style="color: #4B49AC;font-weight: 800;">Confirmation Message</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         
+        </div>
+        <div class="modal-body">
+          <p>Are You Sure!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -341,9 +385,9 @@
                           <tr>
                             <td class="py-1">
                                 <div class="d-flex px-2 py-1">
-                                    <div>
+                                    <!-- <div>
                                       <img src="./images/faces/user.png" class="avatar avatar-sm me-3" alt="user1">
-                                    </div>
+                                    </div> -->
                                     <div class="d-flex flex-column justify-content-center">
                                       <h6 class="mb-0 text-sm" style="color:skyblue"> #24331</h6>
                                     </div>
@@ -360,7 +404,10 @@
                                 </td>
                             <td>
                                 <a href="maininstance.html">
-                                    <button type="button" class="btn btn-primary">Manage</button>
+                                    <button type="button" class="btn btn-primary btn-icon-text">
+                                      <i class="fa fa-rocket"></i>
+                                      Manage
+                                    </button>
                                 </a>
                                 <i class="ti-align-justify ml-2"></i>
                             </td>
@@ -1041,6 +1088,33 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
